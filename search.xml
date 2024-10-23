@@ -4,13 +4,81 @@
   
     
     <entry>
+      <title>群晖使用docker部署joplin</title>
+      <link href="/2024/10/23/%E7%BE%A4%E6%99%96%E4%BD%BF%E7%94%A8docker%E9%83%A8%E7%BD%B2joplin/"/>
+      <url>/2024/10/23/%E7%BE%A4%E6%99%96%E4%BD%BF%E7%94%A8docker%E9%83%A8%E7%BD%B2joplin/</url>
+      
+        <content type="html"><![CDATA[<p>#群晖使用docker部署joplin</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  db:</span><br><span class="line">    image: postgres:15</span><br><span class="line">    volumes:</span><br><span class="line">      - /volume1/docker/joplin:/var/lib/postgresql/data</span><br><span class="line">    restart: unless-stopped</span><br><span class="line">    environment:</span><br><span class="line">      - POSTGRES_PASSWORD=joplin</span><br><span class="line">      - POSTGRES_USER=joplin</span><br><span class="line">      - POSTGRES_DB=joplin</span><br><span class="line"></span><br><span class="line">  app:</span><br><span class="line">    image: joplin/server:latest</span><br><span class="line">    depends_on:</span><br><span class="line">      - db</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;22300:22300&quot;</span></span><br><span class="line">    restart: unless-stopped</span><br><span class="line">    environment:</span><br><span class="line">      - APP_PORT=22300</span><br><span class="line">      - APP_BASE_URL=http://192.168.88.8:22300</span><br><span class="line">      - DB_CLIENT=pg</span><br><span class="line">      - POSTGRES_PASSWORD=joplin</span><br><span class="line">      - POSTGRES_DB=joplin</span><br><span class="line">      - POSTGRES_USER=joplin</span><br><span class="line">      - POSTGRES_PORT=5432</span><br><span class="line">      - POSTGRES_HOST=db</span><br></pre></td></tr></table></figure><p>#密码<br>admin@localhost<br>admin</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Synogoly </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 群晖使用docker部署joplin </tag>
+            
+            <tag> NAS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>G-Box 安装使用说明</title>
+      <link href="/2024/10/23/G-Box-%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"/>
+      <url>/2024/10/23/G-Box-%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</url>
+      
+        <content type="html"><![CDATA[<h2 id="G-Box-安装使用说明"><a href="#G-Box-安装使用说明" class="headerlink" title="G-Box 安装使用说明"></a>G-Box 安装使用说明</h2><p>在需要安装 G-Box 的设备上，使用 SSH 工具登录到其命令控制台，执行以下一键脚本。在主菜单中选择 <code>5</code>，并根据引导完成安装。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -c <span class="string">&quot;<span class="subst">$(curl -sSLf https://ailg.ggbond.org/xy_install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure><p>备用脚本</p><p>如果上面的脚本无法使用，可以尝试以下备用脚本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -c <span class="string">&quot;<span class="subst">$(curl -sSLf https://gbox.ggbond.org/xy_install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -c <span class="string">&quot;<span class="subst">$(curl -sSLf https://xy.ggbond.org/xy/xy_install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 一键脚本 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> G-Boxx </tag>
+            
+            <tag> 安装 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>NewPost</title>
-      <link href="/2024/10/22/NewPost/"/>
-      <url>/2024/10/22/NewPost/</url>
+      <link href="/2024/10/22/%E6%96%B0%E7%9A%84%E6%96%87%E7%AB%A0/"/>
+      <url>/2024/10/22/%E6%96%B0%E7%9A%84%E6%96%87%E7%AB%A0/</url>
       
         <content type="html"><![CDATA[]]></content>
       
       
+      <categories>
+          
+          <category> 技术类 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 标签1 </tag>
+            
+            <tag> 标签2 </tag>
+            
+        </tags>
       
     </entry>
     
