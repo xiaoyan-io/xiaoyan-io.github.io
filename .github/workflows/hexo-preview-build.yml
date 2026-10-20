@@ -1,0 +1,30 @@
+name: Hexo Anzhiyu Preview Build
+on:
+  push:
+    branches: [feature/anzhiyu-preview]
+    paths:
+      - "hexo-source/**"
+      - ".github/workflows/hexo-preview-build.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hexo-source
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: hexo-source/package-lock.json
+      - run: npm ci --registry=https://registry.npmjs.org/
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: anzhiyu-preview-static-site
+          path: hexo-source/public
+          retention-days: 14
