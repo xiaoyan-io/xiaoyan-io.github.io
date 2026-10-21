@@ -1,0 +1,90 @@
+# ALAN Hexo / Pages CMS staging config.
+# This branch is intentionally isolated from main and Cloudflare production deployment.
+# Edit Markdown source in hexo-source; do not edit generated site HTML.
+
+media:
+  input: hexo-source/source/img/uploads
+  output: /img/uploads
+  rename: safe
+  categories: [image]
+
+content:
+  - name: posts
+    label: "Hexo 文章（测试环境）"
+    type: collection
+    path: hexo-source/source/_posts
+    format: yaml-frontmatter
+    filename: "{title}.md"
+    operations:
+      create: true
+      rename: false
+      delete: false
+    view:
+      fields: [title, date]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: 标题
+        type: string
+        required: true
+      - name: date
+        label: 日期
+        type: date
+      - name: tags
+        label: 标签
+        type: string
+        list: true
+      - name: categories
+        label: 分类
+        type: string
+        list: true
+      - name: body
+        label: 文章正文
+        type: rich-text
+        options:
+          format: markdown
+          switcher: true
+
+  - name: drafts
+    label: "Hexo 草稿（推荐先测试）"
+    type: collection
+    path: hexo-source/source/_drafts
+    format: yaml-frontmatter
+    filename: "{title}.md"
+    operations:
+      create: true
+      rename: false
+      delete: false
+    view:
+      fields: [title, date]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: 标题
+        type: string
+        required: true
+      - name: date
+        label: 日期
+        type: date
+      - name: tags
+        label: 标签
+        type: string
+        list: true
+      - name: categories
+        label: 分类
+        type: string
+        list: true
+      - name: body
+        label: 草稿正文
+        type: rich-text
+        options:
+          format: markdown
+          switcher: true
