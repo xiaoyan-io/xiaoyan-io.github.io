@@ -6,7 +6,6 @@ tags:
 categories:
   - staging
 ---
-
 # Pages CMS 手机端测试草稿
 
 这是一个仅用于测试分支的 Hexo 草稿。
@@ -18,3 +17,5 @@ categories:
 > 保存后，检查 GitHub 测试分支中的文件是否更新。
 
 注意：不要合并到 `main`，不要手动触发生产部署。
+
+Pages CMS mobile editing test successful.
