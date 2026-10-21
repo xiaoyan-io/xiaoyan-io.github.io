@@ -51,6 +51,15 @@ jobs:
               sys.exit(1)
           print("PASS: Cloudflare API token is active.")
 
+          list_code, listing = request("/accounts/" + account + "/pages/projects?per_page=100")
+          if list_code == 200 and listing.get("success") and isinstance(listing.get("result"), list):
+              projects = listing["result"]
+              print(f"PASS: Pages projects are listable in the configured account. Project count: {len(projects)}.")
+              print("INFO: Expected project name is present in list:", any(p.get("name") == "xiaoyan-io" for p in projects))
+          else:
+              print(f"FAIL: Cannot list Pages projects in configured account (HTTP {list_code}); confirm Account ID and token access.")
+              sys.exit(1)
+
           code, result = request("/accounts/" + account + "/pages/projects/xiaoyan-io")
           if code == 200 and result.get("success") and result.get("result"):
               print("PASS: Expected Cloudflare Pages project is accessible (read-only).")
