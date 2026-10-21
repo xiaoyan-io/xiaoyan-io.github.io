@@ -1,0 +1,41 @@
+name: Pages CMS Hexo Safe Build Check
+
+on:
+  push:
+    branches:
+      - test/pages-cms-anzhiyu
+    paths:
+      - ".pages.yml"
+      - "hexo-source/**"
+      - ".github/workflows/pages-cms-safe-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-hexo:
+    name: Build Hexo (no deploy)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hexo-source
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: hexo-source/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --registry=https://registry.npmjs.org/
+      - name: Generate static site
+        run: npm run build
+      - name: Assert generated homepage
+        run: test -s public/index.html
+      - name: Save preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-cms-hexo-preview
+          path: hexo-source/public
+          retention-days: 7
