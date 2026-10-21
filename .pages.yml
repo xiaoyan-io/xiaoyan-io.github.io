@@ -1,0 +1,47 @@
+# ALAN / Pages CMS sandbox, configured ONLY on test/pages-cms-hexo-integration
+# Production deployment currently serves generated HTML, not a complete Hexo source tree.
+# Do not merge this test configuration into main until Hexo source and build are restored.
+
+media:
+  input: source/img/uploads
+  output: /img/uploads
+
+content:
+  - name: sandbox_drafts
+    label: "Hexo 草稿（测试专用）"
+    type: collection
+    path: source/_drafts
+    format: yaml-frontmatter
+    filename: "{year}-{month}-{day}-{title}.md"
+    operations:
+      create: true
+      rename: false
+      delete: false
+    view:
+      fields: [title, date]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: 标题
+        type: string
+        required: true
+      - name: date
+        label: 日期
+        type: date
+      - name: tags
+        label: 标签
+        type: string
+        list: true
+      - name: categories
+        label: 分类
+        type: string
+        list: true
+      - name: body
+        label: 正文
+        type: rich-text
+        options:
+          format: markdown
