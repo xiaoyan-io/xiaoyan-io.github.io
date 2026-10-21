@@ -1,0 +1,62 @@
+name: Cloudflare Pages Connection Check (No Deploy)
+
+on:
+  push:
+    branches:
+      - test/pages-cms-anzhiyu
+    paths:
+      - ".github/workflows/cloudflare-connection-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  connection-check:
+    name: Verify Cloudflare credentials and Pages project (read-only)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CF_PAGES_API_TOKEN }}
+      CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+    steps:
+      - name: Validate credentials without deployment
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, os, sys, urllib.request, urllib.error
+
+          token = os.environ.get("CLOUDFLARE_API_TOKEN", "")
+          account = os.environ.get("CF_ACCOUNT_ID", "")
+          if not token or not account:
+              print("FAIL: required GitHub Actions secrets are missing or empty.")
+              sys.exit(1)
+
+          def request(path):
+              req = urllib.request.Request(
+                  "https://api.cloudflare.com/client/v4" + path,
+                  headers={"Authorization": "Bearer " + token, "Accept": "application/json"},
+              )
+              try:
+                  with urllib.request.urlopen(req, timeout=20) as res:
+                      return res.status, json.load(res)
+              except urllib.error.HTTPError as error:
+                  return error.code, {}
+              except Exception:
+                  return 0, {}
+
+          code, result = request("/user/tokens/verify")
+          if code != 200 or not result.get("success") or result.get("result", {}).get("status") != "active":
+              print(f"FAIL: Cloudflare token verification did not return an active token (HTTP {code}).")
+              sys.exit(1)
+          print("PASS: Cloudflare API token is active.")
+
+          code, result = request("/accounts/" + account + "/pages/projects/xiaoyan-io")
+          if code == 200 and result.get("success") and result.get("result"):
+              print("PASS: Expected Cloudflare Pages project is accessible (read-only).")
+          else:
+              print(f"FAIL: Expected Pages project could not be verified (HTTP {code}); check account ID, project name, and token Pages permissions.")
+              sys.exit(1)
+
+          print("PASS: Cloudflare connection test complete. No deployments executed.")
+          PY
