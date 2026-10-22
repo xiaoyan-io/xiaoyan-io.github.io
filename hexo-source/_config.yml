@@ -7,7 +7,7 @@ title: ALAN
 subtitle: Spatial & Technology Systems
 description: AI, engineering, homelab and technology projects.
 keywords:
-author: John Doe
+author: Alan
 language: en
 timezone: Asia/Yangon
 
@@ -106,6 +106,30 @@ deploy:
 
 # Preview recovery: suppress theme sample categories and absent donation page.
 theme_config:
+  # Keep the isolated preview usable even if external assets stall.
+  preloader:
+    enable: false
+  centerConsole:
+    enable: false
+  inject:
+    head:
+      - '<link rel="stylesheet" href="/css/preview-fixes.css">'
+  avatar:
+    img: /favicon.ico
+  # Suppress the theme's sample city; no author location has been verified.
+  post_copyright:
+    location: ''
+  # Expose only pages that exist in this preview build.
+  menu:
+    Content:
+      Archives: /archives/ || anzhiyu-icon-box-archive
+      Categories: /categories/ || anzhiyu-icon-shapes
+      Tags: /tags/ || anzhiyu-icon-tags
+  aside:
+    card_author:
+      enable: false
+    card_weixin:
+      enable: false
   home_top:
     enable: false
   reward:

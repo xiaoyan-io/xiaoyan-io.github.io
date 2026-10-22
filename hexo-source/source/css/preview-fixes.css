@@ -1,0 +1,16 @@
+/* Isolated Anzhiyu preview: provide a readable fallback when a post has no cover asset. */
+#page-header.post-bg {
+  background: linear-gradient(135deg, #0b1b30 0%, #173852 58%, #234961 100%) !important;
+}
+#page-header.post-bg #post-top-cover img#post-top-bg[src=""] {
+  display: none !important;
+}
+#page-header.post-bg #post-info .post-title {
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .42);
+}
+@media (max-width: 768px) {
+  #page-header.post-bg {
+    height: 340px !important;
+  }
+}
