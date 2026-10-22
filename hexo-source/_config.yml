@@ -9,11 +9,11 @@ description: AI, engineering, homelab and technology projects.
 keywords:
 author: John Doe
 language: en
-timezone: ''
+timezone: Asia/Yangon
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://xiaoyan-io.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -29,6 +29,7 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - files/**
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -102,3 +103,10 @@ theme: anzhiyu
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+# Preview recovery: suppress theme sample categories and absent donation page.
+theme_config:
+  home_top:
+    enable: false
+  reward:
+    enable: false

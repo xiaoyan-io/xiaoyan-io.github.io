@@ -1,0 +1,68 @@
+{
+  "checks": [
+    {
+      "url": "/2025/11/26/hello-world/",
+      "body_equal": true,
+      "code_equal": true,
+      "code_blocks": 4,
+      "title_equal": true,
+      "date_equal": "preserved in page front matter",
+      "images_equal": true,
+      "missing_anchors": [],
+      "missing_content_links": [],
+      "taxonomy_equal": true
+    },
+    {
+      "url": "/2025/11/26/pve9-upgrade-kit/",
+      "body_equal": true,
+      "code_equal": true,
+      "code_blocks": 3,
+      "title_equal": true,
+      "date_equal": true,
+      "images_equal": true,
+      "missing_anchors": [],
+      "missing_content_links": [],
+      "taxonomy_equal": true
+    },
+    {
+      "url": "/2025/11/26/pve9-upgrade-kit-1/",
+      "body_equal": true,
+      "code_equal": true,
+      "code_blocks": 0,
+      "title_equal": true,
+      "date_equal": "preserved in page front matter",
+      "images_equal": true,
+      "missing_anchors": [],
+      "missing_content_links": [],
+      "taxonomy_equal": true
+    },
+    {
+      "url": "/2026/07/05/alan-cloud-agent-hub/",
+      "body_equal": true,
+      "code_equal": true,
+      "code_blocks": 21,
+      "title_equal": true,
+      "date_equal": true,
+      "images_equal": true,
+      "missing_anchors": [],
+      "missing_content_links": [],
+      "taxonomy_equal": true
+    },
+    {
+      "url": "/2026/07/07/hello-world/",
+      "body_equal": true,
+      "code_equal": true,
+      "code_blocks": 4,
+      "title_equal": true,
+      "date_equal": "preserved in page front matter",
+      "images_equal": true,
+      "missing_anchors": [],
+      "missing_content_links": [],
+      "taxonomy_equal": true
+    }
+  ],
+  "asset_byte_equal": true,
+  "asset_sha256": "cb532b866ce69b7c3bd59a971e5981d0fe4bfc281a397e99ced052126f9cabff",
+  "missing_site_local_links": [],
+  "status": "PASS"
+}
